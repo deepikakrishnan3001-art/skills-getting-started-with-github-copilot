@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Clear loading message
       activitiesList.innerHTML = "";
+      activitySelect.innerHTML = ""; // Clear dropdown before repopulating
 
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
@@ -25,6 +26,16 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <div class="participants-section" style="margin-top:1em;background:#eef6fa;border-radius:6px;padding:0.8em;">
+            <h5 style="margin:0 0 0.5em 0;font-size:1em;color:#2980b9;">Participants:</h5>
+            <ul class="participants-list" style="margin:0;padding-left:1.2em;">
+              ${
+                details.participants.length > 0
+                  ? details.participants.map(email => `<li style="font-size:0.97em;color:#34495e;margin-bottom:0.2em;">${email}</li>`).join('')
+                  : '<li><em>No participants yet.</em></li>'
+              }
+            </ul>
+          </div>
         `;
 
         activitiesList.appendChild(activityCard);
